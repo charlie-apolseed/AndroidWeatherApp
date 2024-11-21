@@ -16,7 +16,6 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.rounded.AddCircle
-import androidx.compose.material.icons.rounded.Delete
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -30,7 +29,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 
-import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,13 +43,14 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.httpdemoapolinsky.R
+import com.example.weatherappapolinsky.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CitiesListScreen(
+    modifier: Modifier = Modifier,
     viewModel: CitiesListModel = hiltViewModel(),
-    modifier: Modifier = Modifier
+    onNavigateToDetails: (String) -> Unit
 ) {
     var displayAddLocationDialog by remember { mutableStateOf(false) }
 
@@ -108,9 +107,11 @@ fun CitiesListScreen(
                         .fillMaxSize()
                 ) {
                     items(viewModel.locations.size) { index ->
-                        LocationCard(location = viewModel.locations[index], viewModel = viewModel) {
-                            viewModel.addLocation(it)
-                        }
+                        LocationCard(
+                            location = viewModel.locations[index],
+                            viewModel = viewModel,
+                            onClick = { onNavigateToDetails(it) }
+                        )
                     }
                 }
             }

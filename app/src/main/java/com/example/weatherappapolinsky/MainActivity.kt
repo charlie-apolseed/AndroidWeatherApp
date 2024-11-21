@@ -12,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.weatherappapolinsky.ui.navigation.Screen
 import com.example.weatherappapolinsky.ui.screen.CitiesListScreen
+import com.example.weatherappapolinsky.ui.screen.details_screen.DetailsScreen
 import com.example.weatherappapolinsky.ui.theme.WeatherAppApolinskyTheme
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -39,7 +40,14 @@ fun NavGraph(
         startDestination = Screen.CitiesList.route
     ) {
         composable(Screen.CitiesList.route) {
-            CitiesListScreen()
+            CitiesListScreen(
+                onNavigateToDetails = { city: String ->
+                    navController.navigate("DetailsScreen?city=$city")
+                }
+            )
+        }
+        composable("DetailsScreen?city={city}") { city ->
+            DetailsScreen()
         }
 
     }
