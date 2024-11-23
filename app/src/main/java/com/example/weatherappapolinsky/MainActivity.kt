@@ -47,7 +47,9 @@ fun NavGraph(
             )
         }
         composable("DetailsScreen?city={city}") { city ->
-            DetailsScreen()
+            DetailsScreen(onBackAction = {
+                navController.popBackStack()
+            })
         }
 
     }

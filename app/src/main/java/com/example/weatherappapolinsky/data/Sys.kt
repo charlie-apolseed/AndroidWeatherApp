@@ -11,9 +11,9 @@ data class Sys(
     @SerialName("id")
     var id: Int? = null,
     @SerialName("sunrise")
-    var sunrise: Int? = null,
+    var sunrise: Long? = null,
     @SerialName("sunset")
-    var sunset: Int? = null,
+    var sunset: Long? = null,
     @SerialName("type")
     var type: Int? = null
 )

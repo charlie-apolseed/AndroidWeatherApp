@@ -17,7 +17,7 @@ data class WeatherResult(
     @SerialName("dt")
     var dt: Int? = null,
     @SerialName("id")
-    var id: Int? = null,
+    var id: Double? = null,
     @SerialName("main")
     var main: Main? = null,
     @SerialName("name")
@@ -25,9 +25,9 @@ data class WeatherResult(
     @SerialName("sys")
     var sys: Sys? = null,
     @SerialName("timezone")
-    var timezone: Int? = null,
+    var timezone: Double? = null,
     @SerialName("visibility")
-    var visibility: Int? = null,
+    var visibility: Double? = null,
     @SerialName("weather")
     var weather: List<Weather?>? = null,
     @SerialName("wind")

@@ -17,7 +17,7 @@ data class Main(
     @SerialName("sea_level")
     var seaLevel: Int? = null,
     @SerialName("temp")
-    var temp: Int? = null,
+    var temp: Double? = null,
     @SerialName("temp_max")
     var tempMax: Double? = null,
     @SerialName("temp_min")

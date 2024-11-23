@@ -7,7 +7,7 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Wind(
     @SerialName("deg")
-    var deg: Int? = null,
+    var deg: Double? = null,
     @SerialName("speed")
     var speed: Double? = null
 )

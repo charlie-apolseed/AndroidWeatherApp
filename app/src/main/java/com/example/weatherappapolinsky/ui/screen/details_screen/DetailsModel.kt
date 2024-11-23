@@ -1,5 +1,6 @@
 package com.example.weatherappapolinsky.ui.screen.details_screen
 
+import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -20,20 +21,29 @@ class DetailsModel @Inject constructor(
     savedStateHandle: SavedStateHandle
 ) : ViewModel() {
     var city = savedStateHandle.get<String>("city")
-
     var detailsUiState: DetailsUiState by mutableStateOf(DetailsUiState.Loading)
 
+    init {
+        getWeather()
+    }
+
+
+
     fun getWeather() {
+        Log.d("DetailsModel", "getWeather() called")
         detailsUiState = DetailsUiState.Loading
         viewModelScope.launch {
             detailsUiState = try {
                 val result = weatherAPI.getWeather(city!!)
                 DetailsUiState.Success(result)
             } catch (e: IOException) {
+                Log.d("DetailsModel", "IO Exception: {$e.message}")
                 DetailsUiState.Error
             } catch (e: HttpException) {
+                Log.d("DetailsModel", "HTTP Exception: {$e.message}")
                 DetailsUiState.Error
             } catch (e: Exception) {
+                Log.d("DetailsModel", "Other Exception: {$e.message}")
                 DetailsUiState.Error
             }
         }

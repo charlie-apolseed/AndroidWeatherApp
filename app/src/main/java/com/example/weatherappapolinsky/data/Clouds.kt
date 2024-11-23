@@ -7,5 +7,5 @@ import kotlinx.serialization.Serializable
 @Serializable
 data class Clouds(
     @SerialName("all")
-    var all: Int? = null
+    var all: Double? = null
 )
