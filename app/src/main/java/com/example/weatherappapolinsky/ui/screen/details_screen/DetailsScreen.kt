@@ -1,6 +1,5 @@
 package com.example.weatherappapolinsky.ui.screen.details_screen
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -13,12 +12,9 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.AddCircle
-import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -32,18 +28,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.Font
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.example.weatherappapolinsky.R
 import com.example.weatherappapolinsky.data.WeatherResult
-import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
@@ -76,7 +69,7 @@ fun DetailsScreen(
                             Icon(
                                 Icons.AutoMirrored.Rounded.ArrowBack,
                                 tint = Color.White,
-                                contentDescription = "Back",
+                                contentDescription = stringResource(R.string.back),
                                 modifier = Modifier.size(50.dp)
                             )
                         }
@@ -84,13 +77,13 @@ fun DetailsScreen(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Image(
                                 painter = painterResource(id = R.drawable.logo),
-                                contentDescription = "Logo",
+                                contentDescription = stringResource(R.string.logo),
                                 modifier = Modifier
                                     .size(50.dp)
                                     .padding(end = 10.dp)
                             )
                             Text(
-                                text = "| Rain Dodger",
+                                text = stringResource(R.string.header_text),
                                 style = MaterialTheme.typography.headlineMedium
                             )
                         }
@@ -117,18 +110,22 @@ fun DetailsScreen(
                 is DetailsUiState.Success -> DetailsResultScreen((detailsViewModel.detailsUiState as DetailsUiState.Success).weatherResult)
                 is DetailsUiState.Error -> Column {
                     Text(
-                        text = "Error...",
+                        modifier = Modifier.padding(top = 20.dp),
+                        text = stringResource(R.string.error),
                         style = MaterialTheme.typography.titleLarge
                     )
                     Button(
                         modifier = Modifier.padding(top = 20.dp),
-                        onClick = {detailsViewModel.getWeather()}
+                        onClick = { detailsViewModel.getWeather() }
                     ) {
-                        Text("Reload")
+                        Text(stringResource(R.string.reload))
                     }
                 }
 
-
+                is DetailsUiState.LocationError -> Text(
+                    modifier = Modifier.padding(top = 20.dp),
+                    text = stringResource(R.string.location_not_found)
+                )
             }
         }
     }
@@ -188,7 +185,7 @@ fun DetailsResultScreen(weatherResult: WeatherResult) {
                         )
                         .crossfade(true)
                         .build(),
-                    contentDescription = "Image",
+                    contentDescription = stringResource(R.string.image),
                     contentScale = ContentScale.Crop,
                     modifier = Modifier
                         .size(180.dp)

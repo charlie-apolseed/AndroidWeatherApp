@@ -5,7 +5,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -42,12 +41,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.weatherappapolinsky.R
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.res.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -71,13 +70,13 @@ fun CitiesListScreen(
                         Row(verticalAlignment = Alignment.CenterVertically) {
                             Image(
                                 painter = painterResource(id = R.drawable.logo),
-                                contentDescription = "Logo",
+                                contentDescription = stringResource(R.string.logo),
                                 modifier = modifier
                                     .size(50.dp)
                                     .padding(end = 10.dp)
                             )
                             Text(
-                                text = "| Rain Dodger",
+                                text = stringResource(R.string.header_text),
                                 style = MaterialTheme.typography.headlineMedium
                             )
                         }
@@ -93,7 +92,7 @@ fun CitiesListScreen(
                         Icon(
                             Icons.Rounded.AddCircle,
                             tint = Color.White,
-                            contentDescription = "Delete",
+                            contentDescription = stringResource(R.string.delete),
                             modifier = Modifier
                                 .size(50.dp)
                                 .padding(end = 10.dp)
@@ -110,7 +109,7 @@ fun CitiesListScreen(
             verticalArrangement = Arrangement.Top
         ) {
             if (cities.isEmpty()) {
-                Text(text = "No locations added")
+                Text(text = stringResource(R.string.no_locations_added))
             } else {
                 LazyColumn(
                     modifier = Modifier
@@ -162,11 +161,11 @@ fun AddLocationDialog(viewModel: CitiesListModel, onCancel: () -> Unit) {
                     verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
-                        text = "Add a Location",
+                        text = stringResource(R.string.add_a_location),
                         style = MaterialTheme.typography.headlineSmall
                     )
                     IconButton(onClick = { onCancel() }) {
-                        Icon(Icons.Filled.Close, contentDescription = "Close")
+                        Icon(Icons.Filled.Close, contentDescription = stringResource(R.string.close))
                     }
                 }
 
@@ -176,15 +175,15 @@ fun AddLocationDialog(viewModel: CitiesListModel, onCancel: () -> Unit) {
                         newLocationTitle = it
                         inputError = it.isEmpty()
                     },
-                    label = { Text("Location") },
+                    label = { Text(stringResource(R.string.location)) },
                     modifier = Modifier
                         .fillMaxWidth(.9f),
                     isError = inputError,
-                    supportingText = { if (inputError) Text("Location cannot be empty") },
+                    supportingText = { if (inputError) Text(stringResource(R.string.location_cannot_be_empty)) },
                     trailingIcon = {
                         if (inputError)
                             Icon(
-                                Icons.Filled.Warning, "error",
+                                Icons.Filled.Warning, stringResource(R.string.error),
                                 tint = MaterialTheme.colorScheme.error
                             )
                     }
@@ -197,7 +196,7 @@ fun AddLocationDialog(viewModel: CitiesListModel, onCancel: () -> Unit) {
                         }
                     }
                 ) {
-                    Text(text = "Add Location")
+                    Text(text = stringResource(R.string.add_location))
                 }
             }
         }
@@ -233,7 +232,7 @@ fun LocationCard(viewModel: CitiesListModel, location: String, onClick: (city: S
                 modifier = Modifier.padding(10.dp)
             ) {
                 Icon(
-                    Icons.Filled.Delete, contentDescription = "Delete"
+                    Icons.Filled.Delete, contentDescription = stringResource(R.string.delete)
                 )
             }
         }

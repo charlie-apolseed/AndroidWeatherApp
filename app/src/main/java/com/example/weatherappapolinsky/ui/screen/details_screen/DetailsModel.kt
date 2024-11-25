@@ -28,7 +28,6 @@ class DetailsModel @Inject constructor(
     }
 
 
-
     fun getWeather() {
         Log.d("DetailsModel", "getWeather() called")
         detailsUiState = DetailsUiState.Loading
@@ -41,7 +40,12 @@ class DetailsModel @Inject constructor(
                 DetailsUiState.Error
             } catch (e: HttpException) {
                 Log.d("DetailsModel", "HTTP Exception: {$e.message}")
-                DetailsUiState.Error
+                Log.d("DetailsModel", "HTTP Exception: ${e.code()}")
+                if (e.code() == 404) {
+                    DetailsUiState.LocationError
+                } else {
+                    DetailsUiState.Error
+                }
             } catch (e: Exception) {
                 Log.d("DetailsModel", "Other Exception: {$e.message}")
                 DetailsUiState.Error
@@ -54,4 +58,5 @@ sealed interface DetailsUiState {
     data class Success(val weatherResult: WeatherResult) : DetailsUiState
     object Error : DetailsUiState
     object Loading : DetailsUiState
+    object LocationError : DetailsUiState
 }

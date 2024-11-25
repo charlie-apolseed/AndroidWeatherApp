@@ -1,3 +1,17 @@
 <resources>
     <string name="app_name">WeatherAppApolinsky</string>
+    <string name="back">Back</string>
+    <string name="logo">Logo</string>
+    <string name="header_text">| Rain Dodger</string>
+    <string name="error">Error…</string>
+    <string name="reload">Reload</string>
+    <string name="location_not_found">Location not found</string>
+    <string name="image">Image</string>
+    <string name="delete">Delete</string>
+    <string name="no_locations_added">No locations added</string>
+    <string name="add_a_location">Add a Location</string>
+    <string name="close">Close</string>
+    <string name="location_cannot_be_empty">Location cannot be empty</string>
+    <string name="location">Location</string>
+    <string name="add_location">Add Location</string>
 </resources>
